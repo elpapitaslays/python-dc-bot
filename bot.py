@@ -17,6 +17,7 @@ class MyBot(commands.Bot):
         await self.load_extension("commands.test")
         await self.load_extension("commands.serverinfo")
         await self.load_extension("commands.userinfo")
+        await self.load_extension("commands.avatar")
 
         await self.tree.sync()
 
