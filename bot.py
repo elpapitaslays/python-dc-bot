@@ -1,4 +1,5 @@
 import discord
+import time
 import os
 from dotenv import load_dotenv
 from discord.ext import commands
@@ -14,10 +15,13 @@ class MyBot(commands.Bot):
         super().__init__(command_prefix="!", intents=intents)
 
     async def setup_hook(self):
+        self.start_time = time.time()
+
         await self.load_extension("commands.test")
         await self.load_extension("commands.serverinfo")
         await self.load_extension("commands.userinfo")
         await self.load_extension("commands.avatar")
+        await self.load_extension("commands.ping")
 
         await self.tree.sync()
 
