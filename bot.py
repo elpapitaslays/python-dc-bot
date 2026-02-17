@@ -15,7 +15,8 @@ class MyBot(commands.Bot):
 
     async def setup_hook(self):
         await self.load_extension("commands.test")
-        await self.load_extension("commands.server")
+        await self.load_extension("commands.serverinfo")
+        await self.load_extension("commands.userinfo")
 
         await self.tree.sync()
 
