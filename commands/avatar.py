@@ -17,5 +17,6 @@ class Avatar(commands.Cog):
         embed.set_image(url=user.avatar.url)
 
         await interaction.response.send_message(embed=embed)
+        
 async def setup(bot):
     await bot.add_cog(Avatar(bot))

@@ -1,5 +1,4 @@
 import discord
-import time
 import os
 from dotenv import load_dotenv
 from discord.ext import commands
@@ -15,20 +14,25 @@ class MyBot(commands.Bot):
         super().__init__(command_prefix="!", intents=intents)
 
     async def setup_hook(self):
-        self.start_time = time.time()
+        try:
+            await self.load_extension("commands.test")
+            await self.load_extension("commands.serverinfo")
+            await self.load_extension("commands.userinfo")
+            await self.load_extension("commands.avatar")
+            await self.load_extension("commands.ping")
+            await self.load_extension("commands.handwash")
 
-        await self.load_extension("commands.test")
-        await self.load_extension("commands.serverinfo")
-        await self.load_extension("commands.userinfo")
-        await self.load_extension("commands.avatar")
-        await self.load_extension("commands.ping")
+            await self.tree.sync()
 
-        await self.tree.sync()
+            print("Extensions loaded successfully.")
+        except Exception as e:
+            print("Error during setup:", e)
 
 bot = MyBot()
 
 @bot.event
 async def on_ready():
     print(f"Logged as {bot.user}")
+    print(TOKEN)
 
 bot.run(TOKEN)
